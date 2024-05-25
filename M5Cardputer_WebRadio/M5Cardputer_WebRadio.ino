@@ -1,9 +1,10 @@
+
 /**
  * @file M5Cardputer_WebRadio.ino
- * @author Aurélio Avanzi
+ * @author Aurélio Avanzi Dutch version Roland Breedveld
  * @brief https://github.com/cyberwisk/M5Cardputer_WebRadio
- * @version Beta 1.1
- * @date 2023-12-12
+ * @version Beta 1.2
+ * @date 2024-05-25
  *
  * @Hardwares: M5Cardputer
  * @Platform Version: Arduino M5Stack Board Manager v2.0.7
@@ -38,26 +39,16 @@ static constexpr uint8_t m5spk_virtual_channel = 0;
 /// set web radio station url
 static constexpr const char* station_list[][2] =
 {
-  {"MundoLivre FM"      , "https://up-rcr.webnow.com.br/mundolivre.mp3"},
-  //{"Morcegao FM"      , "https://radio.morcegaofm.com.br/morcegao128"},
-  //{"Radio O Porao"    , "http://server03.stmsg.com.br:6678/stream"},
-  {"Radio Mundo do Rock", "https://servidor34.brlogic.com:8014/live"},
-  {"u80s"               , "http://ice6.somafm.com/u80s-128-mp3"},
-  {"Awesome80s"         , "http://listen.livestreamingservice.com/181-awesome80s_128k.mp3"},
-  {"Metal Detector"     , "http://ice4.somafm.com/metal-128-mp3"},
-  {"181-beatles_128k"   , "http://listen.181fm.com/181-beatles_128k.mp3"},
-  {"Rock hairband"      , "http://listen.livestreamingservice.com/181-hairband_128k.mp3"},
-  {"Antena Joven"       , "https://wms5.webradios.com.br:18964/8964"},
-  {"illstreet-128-mp3"  , "http://ice1.somafm.com/illstreet-128-mp3"},
-  {"bootliquor-128-mp3" , "http://ice1.somafm.com/bootliquor-128-mp3"},
-  {"dronezone-128-mp3"  , "http://ice1.somafm.com/dronezone-128-mp3"},
-  {"Lite Favorites"     , "http://naxos.cdnstream.com:80/1255_128"},
-  {"Classic FM"         , "http://media-ice.musicradio.com:80/ClassicFMMP3"},
-  {"Bons Tempos FM"     , "https://server02.ouvir.radio.br:8050/stream"},
-  //{"Morcegao FM"       , "https://radio.morcegaofm.com.br/auto"},
-  //{"Morcegao FM"        , "https://radio.morcegaofm.com.br/morcegao32"},
+  {"Radio 1"        , "https://icecast.omroep.nl/radio1-bb-mp3"},
+  {"Radio 2"        , "https://icecast.omroep.nl/radio2-bb-mp3"},
+  {"Radio 3"        , "https://icecast.omroep.nl/3fm-bb-mp3"},
+  {"Radio 4"        , "https://icecast.omroep.nl/radio4-bb-mp3"},
+  {"Radio 5"        , "https://icecast.omroep.nl/radio5-bb-mp3"},
+  {"RADIO538"       , "http://playerservices.streamtheworld.com/api/livestream-redirect/RADIO538.mp3"},
+  {"Radio 10"       , "http://playerservices.streamtheworld.com/api/livestream-redirect/RADIO10.mp3"},
+  {"Radio Veronica" , "http://playerservices.streamtheworld.com/api/livestream-redirect/VERONICA.mp3"},
 };
-static constexpr const size_t stations = sizeof(station_list) / sizeof(station_list[0]);
+constexpr const size_t stations = sizeof(station_list) / sizeof(station_list[0]);
 
 class AudioOutputM5Speaker : public AudioOutput
 {
