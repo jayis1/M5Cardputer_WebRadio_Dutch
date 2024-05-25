@@ -15,3 +15,9 @@ ESP8266Audio: https://github.com/earlephilhower/ESP8266Audio
 Wifi:
 
 WiFi Settings will be stored in EEPROM
+
+Aduino Compiler options
+Select Board: M5Stack -> M5StampS3
+Partition Scheme: "No OTA(2MB APP/2MB FATFS)"
+
+Write the bin file: Sketch -> "Export Compiled Binary"
