@@ -1,5 +1,5 @@
  
-# M5Cardputer_WebRadio
+# M5Cardputer WebRadio Dutch version
 
 See the ino file for the web-streams
 
