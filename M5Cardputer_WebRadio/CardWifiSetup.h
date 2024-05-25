@@ -1,9 +1,9 @@
 /**
  * @file CardWifiSetup.h
- * @author Aurélio Avanzi
+ * @author Aurélio Avanzi  Dutch version Roland Breedveld
  * @brief https://github.com/cyberwisk/M5Card_Wifi_KeyBoard_Setup/tree/main/M5Card_Wifi_KeyBoard_Setup
- * @version Apha 0.3
- * @date 2024-01-30
+ * @version Apha 0.4NL
+ * @date 2024-05-25
  *
  * @Hardwares: M5Cardputer - https://docs.m5stack.com/en/core/Cardputer
  * @Dependent Librarys:
@@ -52,7 +52,7 @@ String inputText(const String& prompt, int x, int y) {
 void displayWiFiInfo() {
     M5Cardputer.Display.clear();
     M5Cardputer.Display.setCursor(1, 1);
-    M5Cardputer.Display.drawString("WiFi conectada.", 35, 1);
+    M5Cardputer.Display.drawString("WiFi connecting.", 35, 1);
     M5Cardputer.Display.drawString("SSID: " + WiFi.SSID(), 1, 18);
     M5Cardputer.Display.drawString("IP: " + WiFi.localIP().toString(), 1, 33);
     int8_t rssi = WiFi.RSSI();
@@ -62,11 +62,11 @@ void displayWiFiInfo() {
 String scanAndDisplayNetworks() {
    int numNetworks = WiFi.scanNetworks();
     if (numNetworks == 0) {
-        M5Cardputer.Display.drawString("Nenhuma rede encontrada.", 1, 15);
+        M5Cardputer.Display.drawString("Scan Networks", 1, 15);
         return "";
     } else {
         M5Cardputer.Display.clear();
-        M5Cardputer.Display.drawString("Redes disponiveis:", 1, 1);
+        M5Cardputer.Display.drawString("Found Networks:", 1, 1);
         int selectedNetwork = 0;
         while (1) {
             for (int i = 0; i < 5 && i < numNetworks; ++i) {
@@ -77,7 +77,7 @@ String scanAndDisplayNetworks() {
                     M5Cardputer.Display.drawString(ssid + "    ", 1, 18 + i * 18);
                 }
             }
-            M5Cardputer.Display.drawString("Selecione uma rede.", 1, 108);
+            M5Cardputer.Display.drawString("Select Network.", 1, 108);
             M5Cardputer.update();
             if (M5Cardputer.Keyboard.isChange()) {
                 if (M5Cardputer.Keyboard.isPressed()) {
@@ -113,10 +113,10 @@ void connectToWiFi() {
     WiFi.begin(CFG_WIFI_SSID.c_str(), CFG_WIFI_PASS.c_str());
 
     int tm = 0;
-    M5Cardputer.Display.print("Conectando :");
+    M5Cardputer.Display.print("Connecting :");
     while (tm++ < 110 && WiFi.status() != WL_CONNECTED) {
         M5Cardputer.update();
-        M5Cardputer.Display.drawString("BtnG0 Apaga as Configs.", 1, 108);
+        M5Cardputer.Display.drawString("BtnG0 clean Config.", 1, 108);
         if (M5Cardputer.BtnA.isPressed()){
                 M5Cardputer.Speaker.tone(7000, 1000);
                 Preferences preferences;
@@ -124,7 +124,7 @@ void connectToWiFi() {
                 preferences.clear();
                 preferences.end();
                 M5Cardputer.Display.clear();
-                M5Cardputer.Display.drawString("Memoria apagada.", 1, 60);
+                M5Cardputer.Display.drawString("Memory Cleared.", 1, 60);
                 delay(1000);
                 ESP.restart();
                 return;
@@ -138,11 +138,11 @@ void connectToWiFi() {
         displayWiFiInfo();
     } else {      
         M5Cardputer.Display.clear();
-        M5Cardputer.Display.drawString("Procurando WiFi", 1, 1);
+        M5Cardputer.Display.drawString("Finding WiFi", 1, 1);
         CFG_WIFI_SSID = scanAndDisplayNetworks();
         M5Cardputer.Display.clear();
         M5Cardputer.Display.drawString("SSID: " + CFG_WIFI_SSID, 1, 20);
-        M5Cardputer.Display.drawString("Digite a senha:", 1, 38);
+        M5Cardputer.Display.drawString("Password:", 1, 38);
         CFG_WIFI_PASS = inputText("> ", 4, M5Cardputer.Display.height() - 24);
 
         //Preferences preferences;
@@ -151,7 +151,7 @@ void connectToWiFi() {
         preferences.putString(NVS_PASS_KEY, CFG_WIFI_PASS);
         preferences.end();
         M5Cardputer.Display.clear();
-        M5Cardputer.Display.drawString("SSID e Senha gravados.", 1, 60);
+        M5Cardputer.Display.drawString("SSID Password Registered.", 1, 60);
         WiFi.begin(CFG_WIFI_SSID.c_str(), CFG_WIFI_PASS.c_str());
         delay(100);
         displayWiFiInfo();
