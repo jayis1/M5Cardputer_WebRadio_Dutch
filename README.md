@@ -13,7 +13,8 @@ ESP8266Audio: https://github.com/earlephilhower/ESP8266Audio
 ----
 WiFi Settings will be stored in EEPROM
 
-Aduino Compiler options
+
+Aduino Compiler options:
 
 Select Board: M5Stack -> M5StampS3
 
