@@ -10,7 +10,8 @@ M5Unified : https://github.com/m5stack/M5Unified
 ESP8266Audio: https://github.com/earlephilhower/ESP8266Audio
 
 
-![image](https://github.com/cyberwisk/M5Cardputer_WebRadio/assets/3136312/9bd48f53-334c-43c1-8226-1ece040430c5)
+![image]
+(https://github.com/rolandbreedveld/M5Cardputer_WebRadio_Dutch/blob/main/README.md#:~:text=M5Cardputer_WebRadio_NL.bin-,M5Cardputer_WebRadio_NL,-.jpeg)
 ----
 
 WiFi Settings will be stored in EEPROM
