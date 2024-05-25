@@ -1,6 +1,8 @@
  
 # M5Cardputer_WebRadio
 
+See the ino file for the web-streams
+
 M5Cardputer_WebRadio needs these Librarys: 
 
 M5Unified : https://github.com/m5stack/M5Unified 
