@@ -55,7 +55,7 @@ static constexpr const char* station_list[][2] =
   {"P4 Østjyllands Radio"   ,"http://live-icy.gss.dr.dk/A/A14H.mp3.m3u"},
   {"P5"                     ,"http://live-icy.gss.dr.dk/A/A25H.mp3.m3u"},
   {"P6"                     ,"http://live-icy.gss.dr.dk/A/A29H.mp3.m3u"},
-  {"P7 Mix"                 ," http://live-icy.gss.dr.dk/A/A21H.mp3.m3u"},
+  {"P7 Mix"                 ,"http://live-icy.gss.dr.dk/A/A21H.mp3.m3u"},
   {"P8 Jazz"                ,"http://live-icy.gss.dr.dk/A/A22H.mp3.m3u"},
   {"Cool FM"                ,"http://stream3.specific.dk/SR"},
   {"DBNR"                   ,"http://www.dbnr.dk/dl/DBNR-Winamp.m3u"},
