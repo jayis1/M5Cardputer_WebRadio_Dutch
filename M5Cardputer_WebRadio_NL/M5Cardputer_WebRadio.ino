@@ -1,7 +1,7 @@
 
 /**
  * @file M5Cardputer_WebRadio.ino
- * @author Aurélio Avanzi Dutch version Roland Breedveld
+ * @author Aurélio Avanzi Danish version Roland Breedveld
  * @brief https://github.com/cyberwisk/M5Cardputer_WebRadio
  * @version Beta 1.2
  * @date 2024-05-25
@@ -37,7 +37,7 @@ int previousVolume = 0;
 static constexpr uint8_t m5spk_virtual_channel = 0;
 
 /// set web radio station url
-static constexpr const char* station_list[][2] =
+static constexpr const char* station_list[][38] =
 {
   {"DR MAMA"                ,"http://live-icy.gss.dr.dk/A/A18H.mp3.m3u"},
   {"DR Ramasjang Radio"     ,"http://live-icy.gss.dr.dk/A/A24H.mp3.m3u"},
