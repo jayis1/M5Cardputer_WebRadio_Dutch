@@ -19,6 +19,7 @@
 #include <M5Cardputer.h>
 #include <M5Unified.h>
 #include <Preferences.h>
+#include <HTTPClient.h>
 #include "CardWifiSetup.h"
 
 #include <AudioOutput.h>
@@ -231,10 +232,34 @@ public:
   }
 };
 
-static constexpr const int preallocateBufferSize = 128 * 1024;
+static constexpr const int preallocateBufferSize = 16 * 1024;
 static constexpr const int preallocateCodecSize = 85332; // MP3 and AAC+SBR codec max mem needed
 static void* preallocateBuffer = nullptr;
 static void* preallocateCodec = nullptr;
+
+String getDirectUrl(String url) {
+  if (url.endsWith(".m3u") || url.endsWith(".pls")) {
+     HTTPClient http;
+     http.begin(url);
+     int httpCode = http.GET();
+     if (httpCode == HTTP_CODE_OK) {
+        String payload = http.getString();
+        // Simple parser: look for http(s)://
+        int httpIndex = payload.indexOf("http");
+        if (httpIndex != -1) {
+           int endIndex = payload.indexOf('\n', httpIndex);
+           if (endIndex == -1) endIndex = payload.indexOf('\r', httpIndex);
+           if (endIndex == -1) endIndex = payload.length();
+           String newUrl = payload.substring(httpIndex, endIndex);
+           newUrl.trim();
+           return newUrl;
+        }
+     }
+     http.end();
+  }
+  return url;
+}
+
 static constexpr size_t WAVE_SIZE = 320;
 static AudioOutputM5Speaker out(&M5Cardputer.Speaker, m5spk_virtual_channel);
 static AudioGenerator *decoder = nullptr;
@@ -305,7 +330,8 @@ static void decodeTask(void*)
       meta_text[0] = station_list[index][0];
       stream_title[0] = 0;
       meta_mod_bits = 3;
-      file = new AudioFileSourceICYStream(station_list[index][1]);
+      String directUrl = getDirectUrl(station_list[index][1]);
+      file = new AudioFileSourceICYStream(directUrl.c_str());
       file->RegisterMetadataCB(MDCallback, (void*)"ICY");
       buff = new AudioFileSourceBuffer(file, preallocateBuffer, preallocateBufferSize);
       //decoder = isAAC ? (AudioGenerator*) new AudioGeneratorAAC(preallocateCodec, preallocateCodecSize) : (AudioGenerator*) new AudioGeneratorMP3(preallocateCodec, preallocateCodecSize);
@@ -616,6 +642,14 @@ void setup(void)
 
   preallocateBuffer = malloc(preallocateBufferSize);
   preallocateCodec = malloc(preallocateCodecSize);
+
+  if (!preallocateBuffer || !preallocateCodec) {
+    M5Cardputer.Display.fillScreen(TFT_RED);
+    M5Cardputer.Display.setCursor(0, 0);
+    M5Cardputer.Display.setTextSize(2);
+    M5Cardputer.Display.println("Memory Alloc Failed!");
+    while(1) delay(100);
+  }
 
   { /// custom setting
     auto spk_cfg = M5Cardputer.Speaker.config();
